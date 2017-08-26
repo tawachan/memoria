@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types'
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_PROJECTS, FETCH_ERROR } from './types'
 
 const ROOT_URL = 'http://localhost:3000';
 
+
+// for authentication
 export function signIn(values, callback) {
 
   return function(dispatch) {
@@ -45,10 +47,38 @@ export function signUp(values, callback) {
   }
 }
 
-
 export function authError(error) {
   return {
     type: AUTH_ERROR,
+    payload: error
+  }
+}
+
+// for prjects
+export function fetchProjects() {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/projects`, {
+      headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+      }
+    })
+      .then(response => {
+        dispatch({
+          type: FETCH_PROJECTS,
+          payload: response.data
+        });
+      })
+      .catch(() => {
+        dispatch(fetchError());
+      });
+  }
+}
+
+export function fetchError(error = "fetch error") {
+  return {
+    type: FETCH_ERROR,
     payload: error
   }
 }

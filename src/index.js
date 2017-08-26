@@ -16,7 +16,7 @@ import Header       from './components/shared/header'
 import SignIn       from './components/auth/sign_in';
 import SignOut      from './components/auth/sign_out';
 import SignUp       from './components/auth/sign_up';
-import Test         from './components/test';
+import Plan         from './components/plan';
 import NotFound     from './components/not_found'
 import RequireAuthentication from './components/auth/require_authentication'
 
@@ -41,8 +41,8 @@ ReactDOM.render(
             <Route path='/auth/sign_out' exact component={SignOut} />
             <Route path='/auth/sign_up' exact component={SignUp} />
             {/* after signup */}
-            <Route path='/' exact component={RequireAuthentication(Test)} />
-            <Route path='/test' exact component={RequireAuthentication(Test)} />
+            <Route path='/' exact component={RequireAuthentication(Plan)} />
+            <Route path='/plan' exact component={RequireAuthentication(Plan)} />
 
             <Route component={ NotFound } />
           </Switch>

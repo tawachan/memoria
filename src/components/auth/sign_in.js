@@ -23,7 +23,7 @@ class SignIn extends Component {
 
   onSubmit(values) {
      this.props.signIn(values, () => {
-      this.props.history.push('/test')
+      this.props.history.push('/plan')
     });
   }
 
