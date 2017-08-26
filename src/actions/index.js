@@ -1,23 +1,26 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_PROJECTS, FETCH_ERROR } from './types'
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_PROJECTS, FETCH_ERROR, FETCH_USER } from './types'
 
 const ROOT_URL = 'http://localhost:3000';
 
 
-// for authentication
+// for authentication and user
 export function signIn(values, callback) {
 
   return function(dispatch) {
     axios.post(`${ROOT_URL}/auth/sign_in`, values)
       .then(response => {
-        dispatch({ type: AUTH_USER });
+        dispatch({
+          type: AUTH_USER,
+          payload: response.data
+        });
         localStorage.setItem('uid', response.headers['uid']);
         localStorage.setItem('access-token', response.headers['access-token']);
         localStorage.setItem('client', response.headers['client']);
         callback();
       })
       .catch(() => {
-        dispatch(authError("this is error"));
+        dispatch(authError('Auth'));
       })
   }
 }
@@ -35,25 +38,41 @@ export function signUp(values, callback) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/auth`, values)
       .then(response => {
-        dispatch({ type: AUTH_USER });
+        dispatch({
+          type: AUTH_USER,
+          payload: response.data
+        });
         localStorage.setItem('uid', response.headers['uid']);
         localStorage.setItem('access-token', response.headers['access-token']);
         localStorage.setItem('client', response.headers['client']);
         callback();
       })
       .catch(response => {
-        dispatch(authError("can not create user"));
+        dispatch(authError('can not create user'));
       })
   }
 }
 
-export function authError(error) {
-  return {
-    type: AUTH_ERROR,
-    payload: error
+export function fetchUser(values) {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/current_user`, {
+      headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+        }
+      })
+      .then(response => {
+        dispatch({
+          type: FETCH_USER,
+          payload: response
+        });
+      })
+      .catch(response => {
+        dispatch(fetchError('user'));
+      })
   }
 }
-
 // for prjects
 export function fetchProjects() {
   return function(dispatch) {
@@ -71,14 +90,22 @@ export function fetchProjects() {
         });
       })
       .catch(() => {
-        dispatch(fetchError());
+        dispatch(fetchError('projects'));
       });
   }
 }
 
-export function fetchError(error = "fetch error") {
+// error
+export function fetchError(error = '') {
   return {
     type: FETCH_ERROR,
-    payload: error
+    payload: `failed to fetch. (${error})`
+  }
+}
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: `failed to authorize. (${error})`
   }
 }

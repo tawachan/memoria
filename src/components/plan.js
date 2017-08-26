@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 
 class Plan extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchProjects();
   }
 
@@ -13,7 +13,7 @@ class Plan extends Component {
     return(
       _.map(this.props.projects, project => {
         return(
-          <li>{ project.name }</li>
+          <li key={project.id}>{ project.name }</li>
         )
       })
     )

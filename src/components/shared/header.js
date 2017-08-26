@@ -1,23 +1,39 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { Router, Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
 
 
 class Header extends Component {
+  componentWillMount() {
+    if (this.props.user.authenticated) {
+      this.props.fetchUser();
+    }
+  }
   renderAuth(authenticated) {
-    console.log(authenticated)
     if (authenticated) {
-      return (
-        <NavItem key="sign_out" eventKey={3}><Link to='/auth/sign_out'>Sign Out</Link></NavItem>
-      );
+      return [
+        <LinkContainer to="/auth/sign_out" key="sign_out">
+          <NavItem>Sign Out</NavItem>
+        </LinkContainer>
+        ,
+        <NavItem key="profile">{ this.props.user.data ? this.props.user.data.name : '' }</NavItem>
+      ];
     } else {
       return [
-        <NavItem key="sign_in" eventKey={1}><Link to='/auth/sign_in'>Sign In</Link></NavItem>,
-        <NavItem key="sign_up" eventKey={2}><Link to='/auth/sign_up'>Sign Up</Link></NavItem>
+        <LinkContainer to="/auth/sign_in" key="sign_in">
+          <NavItem>Sign In</NavItem>
+        </LinkContainer>
+        ,
+        <LinkContainer to="/auth/sign_up" key="sign_up">
+          <NavItem>Sign Up</NavItem>
+        </LinkContainer>
       ];
     }
   }
+
   render() {
     return (
       <Navbar collapseOnSelect>
@@ -40,7 +56,7 @@ class Header extends Component {
             </NavDropdown>
           </Nav>
           <Nav pullRight>
-            { this.renderAuth(this.props.auth.authenticated) }
+            { this.renderAuth(this.props.user.authenticated) }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -49,10 +65,9 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.auth)
   return {
-    auth: state.auth
+    user: state.user
   }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

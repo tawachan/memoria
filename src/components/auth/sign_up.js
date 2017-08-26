@@ -36,7 +36,7 @@ class SignUp extends Component {
         <Field label="Password" placeholder="test" name="password" component={this.renderField} />
         <Field label="Password Again" placeholder="test" name="password_confirm" component={this.renderField} />
         <button type="submit" className="btn btn-primary">SIGN UP!</button>
-        { this.props.auth.error }
+        { this.props.user.errors }
       </form>
     )
   }
@@ -44,7 +44,7 @@ class SignUp extends Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    user: state.user
   }
 }
 

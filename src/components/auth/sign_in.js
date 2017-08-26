@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 class SignIn extends Component {
 
+  component
+
   renderField(field) {
     return(
       <div className="form-group">
@@ -36,10 +38,10 @@ class SignIn extends Component {
           <Field label="Password" placeholder="test" name="password" component={this.renderField} />
           <Field label="Password Again" placeholder="test" name="password_confirm" component={this.renderField} />
           <button type="submit" className="btn btn-primary">Submit</button>
-          { this.props.auth.error }
+          { this.props.errors ? this.props.errors.user : '' }
         </form>
         <div>
-          { this.props.auth.authenticated ? "login!" : "not yet login" }
+          { this.props.user.authenticated ? "login!" : "not yet login" }
         </div>
         <Link to="signout" className="btn btn-default">Sign out</Link>
       </div>
@@ -59,7 +61,7 @@ function validate(values) {
 }
 
 function mapStateToProps(state) {
-  return {auth: state.auth}
+  return {user: state.user}
 }
 
 export default reduxForm({
