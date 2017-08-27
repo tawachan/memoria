@@ -1,11 +1,15 @@
 .plan-sidebar {
+  float: left;
   height: calc(100vh - 50px);
+  width: 200px;
   background: pink;
   overflow: auto;
 }
 
 .plan-content {
+  float: left;
   background: green;
+  width: calc(100% - 200px);
 }
 .project-card {
   position: relative;
@@ -14,6 +18,8 @@
   border-radius: 10px;
   overflow: hidden;
   padding: 0px;
+  height: 140px;
+  margin: 2px 5px;
 }
 
 .project-image {
