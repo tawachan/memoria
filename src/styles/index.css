@@ -1,3 +1,6 @@
-@import url('./App.css');
+@import url('./plan.css');
+@import url('./top.css');
+@import url('./header.css');
+@import url('./_parts.css');
 @import url('./_reset.css')
 

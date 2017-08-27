@@ -36,7 +36,7 @@ class Header extends Component {
 
   render() {
     return (
-      <Navbar collapseOnSelect>
+      <Navbar collapseOnSelect className="navbar-customize">
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Memoria</Link>
