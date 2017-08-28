@@ -1,19 +1,19 @@
-.plan-sidebar {
-  float: left;
-  height: calc(100vh - 50px);
+
+.profile {
   width: 200px;
-  background: pink;
-  overflow: auto;
+  height: 150px;
+  background: grey;
+  position: fixed;
+  z-index: 10;
 }
 
-.plan-content {
-  float: left;
-  background: green;
-  width: calc(100% - 200px);
+.project-list {
+  overflow: scroll;
+  margin-top: 150px;
 }
+
 .project-card {
   position: relative;
-  float: left;
   background: lightblue;
   border-radius: 10px;
   overflow: hidden;
@@ -39,4 +39,3 @@
 	align-items: center;
 	justify-content: left;
 }
-

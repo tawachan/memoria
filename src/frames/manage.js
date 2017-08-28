@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import Sidebar from './plan/sidebar';
-import Content from './plan/content';
+import Sidebar from './subframes/sidebar';
+import Content from './subframes/content';
 
-class Plan extends Component {
+class Manage extends Component {
   render() {
     return (
       <div className="row">
@@ -13,4 +13,4 @@ class Plan extends Component {
     )
   }
 }
-export default Plan
+export default Manage

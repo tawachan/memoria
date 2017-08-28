@@ -11,13 +11,12 @@ import registerServiceWorker from './registerServiceWorker';
 import './styles/index.css';
 import { AUTH_USER } from './actions/types'
 
-import Top          from './components/top'
-import Header       from './components/shared/header'
+import Top          from './frames/top'
 import SignIn       from './components/auth/sign_in';
 import SignOut      from './components/auth/sign_out';
 import SignUp       from './components/auth/sign_up';
-import Plan         from './components/plan';
-import NotFound     from './components/not_found'
+import Manage       from './frames/manage';
+import NotFound     from './frames/not_found'
 import RequireAuthentication from './components/auth/require_authentication'
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createStore);
@@ -32,21 +31,18 @@ ReactDOM.render(
   <div>
     <Provider store={store}>
       <BrowserRouter>
-        <div>
-          <Header />
-          <Switch>
-            {/* before signup */}
-            <Route path='/top' exact component={Top} />
-            <Route path='/auth/sign_in' exact component={SignIn} />
-            <Route path='/auth/sign_out' exact component={SignOut} />
-            <Route path='/auth/sign_up' exact component={SignUp} />
-            {/* after signup */}
-            <Route path='/' exact component={RequireAuthentication(Plan)} />
-            <Route path='/plan' exact component={RequireAuthentication(Plan)} />
+        <Switch>
+          {/* before signup */}
+          <Route path='/top' exact component={Top} />
+          <Route path='/auth/sign_in' exact component={SignIn} />
+          <Route path='/auth/sign_out' exact component={SignOut} />
+          <Route path='/auth/sign_up' exact component={SignUp} />
+          {/* after signup */}
+          <Route path='/' exact component={RequireAuthentication(Manage)} />
+          <Route path='/manage' exact component={RequireAuthentication(Manage)} />
 
-            <Route component={ NotFound } />
-          </Switch>
-        </div>
+          <Route component={ NotFound } />
+        </Switch>
       </BrowserRouter>
     </Provider>
   </div>
