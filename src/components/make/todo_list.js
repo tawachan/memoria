@@ -17,9 +17,9 @@ const styles = {
   trackSwitched: {
     backgroundColor: '#E8AEBE',
   },
-  labelStyle: {
-    color: 'red',
-  },
+  todo: {
+    border: '0.5px solid #EEEEEE'
+  }
 };
 
 class TodoList extends Component {
@@ -36,6 +36,7 @@ class TodoList extends Component {
           <ListItem
             key={todo.id}
             primaryText={todo.task}
+            style={styles.todo}
             rightToggle={
               <Toggle
                 thumbStyle={styles.thumbOff}

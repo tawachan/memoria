@@ -8,7 +8,7 @@ export default function(state = {}, action) {
   case UNAUTH_USER:
     return {authenticated: false, error: ''};
   case FETCH_USER:
-    return { ...state, data: action.payload.data }
+    return { ...state, data: action.payload }
   default:
     return state;
 
