@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Header from '../components/header'
 
 export default class Top extends Component {
   render() {
     return (
       <div>
-        this is landing page
+        <Header />
       </div>
     )
   }
