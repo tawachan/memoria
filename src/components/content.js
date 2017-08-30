@@ -7,6 +7,9 @@ import FontIcon from 'material-ui/FontIcon';
 import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 import SwipeableViews from 'react-swipeable-views';
 
+import MakeIcon from 'react-material-icons/icons/action/schedule';
+import KeepIcon from 'react-material-icons/icons/hardware/memory';
+import ShareIcon from 'react-material-icons/icons/social/share';
 
 const styles = {
   headline: {
@@ -42,9 +45,9 @@ class Content extends Component {
           value={this.props.activeTab}
           tabItemContainerStyle={styles.tab}
         >
-          <Tab label="Make" value={0} />
-          <Tab label="Keep" value={1} />
-          <Tab label="Share" value={2} />
+          <Tab icon={<MakeIcon />} label="Make" value={0} />
+          <Tab icon={<KeepIcon />} label="Keep" value={1} />
+          <Tab icon={<ShareIcon />} label="Share" value={2} />
         </Tabs>
         <SwipeableViews
           index={this.props.activeTab}

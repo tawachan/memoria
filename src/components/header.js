@@ -48,15 +48,23 @@ class Header extends Component {
       toolbar: {
         background: '#32936f'
       },
-      toolbartitle: {
+      title: {
         color: 'white'
+      },
+      projectName: {
+        color: 'white',
+        marginLeft: 40
       }
+
+
     }
 
     return (
       <Toolbar style={styles.toolbar}>
         <ToolbarGroup>
-          <ToolbarTitle style={styles.toolbartitle} text="Memoria" />
+          <ToolbarTitle style={styles.title} text="Memoria"/>
+          <ToolbarSeparator />
+          <ToolbarTitle style={styles.projectName} text={this.props.project.name} />
         </ToolbarGroup>
         <ToolbarGroup>
           { this.renderAuthButtons(this.props.authenticated) }
@@ -80,7 +88,8 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.user.authenticated
+    authenticated: state.user.authenticated,
+    project: state.project
   }
 }
 
