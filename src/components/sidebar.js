@@ -4,11 +4,13 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="header">
-        here is Header
+      <div>
+        sidebar
       </div>
     )
   }
 }
 
 export default Header;
+
+

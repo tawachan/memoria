@@ -12,6 +12,7 @@ class Profile extends Component {
   render() {
     return (
       <div className="profile">
+        <p>プロフィール</p>
         { this.props.user.data ? this.props.user.data.name : '' }
       </div>
     )
@@ -20,7 +21,6 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     user: state.user
   }

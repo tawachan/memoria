@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 
 class SignIn extends Component {
 
-  component
-
   renderField(field) {
     return(
       <div className="form-group">
@@ -25,7 +23,7 @@ class SignIn extends Component {
 
   onSubmit(values) {
      this.props.signIn(values, () => {
-      this.props.history.push('/plan')
+      this.props.history.push('/manage')
     });
   }
 

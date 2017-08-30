@@ -1,7 +1,11 @@
 .make {
-  padding: 5px;
+  padding: 10px;
 }
 
 .todo-list {
 }
 
+.todo-title {
+  line-height: 30px;
+  font-size: 1.2em;
+}
