@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import Make from '../components/make/make';
+import Navigation from './navigation';
+
 import { Tabs, Tab } from 'material-ui/Tabs';
 import FontIcon from 'material-ui/FontIcon';
 import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
@@ -49,6 +51,8 @@ class Content extends Component {
           <Tab icon={<KeepIcon />} label="Keep" value={1} />
           <Tab icon={<ShareIcon />} label="Share" value={2} />
         </Tabs>
+
+        <Navigation />
         <SwipeableViews
           index={this.props.activeTab}
           onChangeIndex={this.onTabChange}

@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Drawer, MenuItem } from 'material-ui';
 import ProjectList from './project_list';
+import * as actions from '../actions/index';
 
-class Header extends Component {
+class Sidebar extends Component {
+
+  onDrawerChange(open, reason) {
+    console.log(reason)
+    this.props.changeSidebar(open);
+  };
 
   render() {
     return (
       <Drawer
-        open={false}
+        docked={false}
+        open={this.props.open || false}
         width={250}
+        onRequestChange={(open, reason) => this.onDrawerChange(open, reason) }
       >
         <ProjectList />
       </Drawer>
@@ -16,6 +25,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    open: state.status.sidebarOpen
+  }
+}
 
-
+export default connect(mapStateToProps, actions)(Sidebar);

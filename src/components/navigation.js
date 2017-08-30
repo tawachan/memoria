@@ -16,31 +16,11 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import { Link } from 'react-router-dom';
 import * as actions from '../actions/index'
 
-class Header extends Component {
+class Navigation extends Component {
 
-  renderAuthButtons(authenticated) {
-    const styles = {
-      button: {
-        color: 'white',
-        margin: '0'
-      }
-    }
-
-    if (!authenticated) {
-      return [
-        <FlatButton label="Sign In" style={styles.button} />,
-        <FlatButton label="Sign Up" style={styles.button} />
-      ]
-    }
-  }
-
-  renderUnauthItem(authenticated) {
-    if (authenticated) {
-      return (
-        <Link to='/auth/sign_out'><MenuItem primaryText="Sign Out" /></Link>
-      )
-    }
-  }
+  onDrawerChange() {
+    this.props.changeSidebar(!this.props.open);
+  };
 
   render() {
 
@@ -54,9 +34,11 @@ class Header extends Component {
       projectName: {
         color: 'white',
         marginLeft: 40
+      },
+      button: {
+        color: 'white',
+        margin: '2',
       }
-
-
     }
 
     return (
@@ -67,7 +49,8 @@ class Header extends Component {
           <ToolbarTitle style={styles.projectName} text={this.props.project.name} />
         </ToolbarGroup>
         <ToolbarGroup>
-          { this.renderAuthButtons(this.props.authenticated) }
+          <FlatButton label="Create Project" style={styles.button} backgroundColor="#E83F6F"/>
+          <FlatButton label="Select Project" style={styles.button} backgroundColor="#E83F6F" onClick={() => this.onDrawerChange()}/>
           <ToolbarSeparator />
           <IconMenu
             iconButtonElement={
@@ -78,7 +61,7 @@ class Header extends Component {
             anchorOrigin={{horizontal: 'right', vertical: 'top'}}
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
           >
-          { this.renderUnauthItem(this.props.authenticated) }
+            <Link to='/auth/sign_out'><MenuItem primaryText="Sign Out" /></Link>
           </IconMenu>
         </ToolbarGroup>
       </Toolbar>
@@ -88,12 +71,12 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.user.authenticated,
-    project: state.project
+    project: state.project,
+    open: state.status.sidebarOpen
   }
 }
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, actions)(Navigation);
 
 
 

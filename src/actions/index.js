@@ -1,5 +1,16 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_PROJECTS, FETCH_PROJECT, FETCH_ERROR, FETCH_USER, CHANGE_TAB, SET_TODO_STATUS } from './types'
+import {
+  AUTH_USER,
+  AUTH_ERROR,
+  UNAUTH_USER,
+  FETCH_PROJECTS,
+  FETCH_PROJECT,
+  FETCH_ERROR,
+  FETCH_USER,
+  CHANGE_TAB,
+  SET_TODO_STATUS,
+  CHANGE_SIDEBAR
+} from './types'
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -141,6 +152,7 @@ export function setTodoStatus(id, checked) {
       });
   }
 }
+
 // error
 export function fetchError(error = '') {
   return {
@@ -156,10 +168,19 @@ export function authError(error) {
   }
 }
 
+// page status
 export function changeTab(activeTab) {
   localStorage.setItem('active-tab', activeTab)
   return {
     type: CHANGE_TAB,
     payload: activeTab
+  }
+}
+
+export function changeSidebar(open) {
+  console.log("open: ", open)
+  return {
+    type: CHANGE_SIDEBAR,
+    payload: open
   }
 }

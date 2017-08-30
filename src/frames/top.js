@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Header from '../components/header'
+import NavigationTop from '../components/navigation_top'
 
 export default class Top extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <NavigationTop />
       </div>
     )
   }

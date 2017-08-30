@@ -34,6 +34,7 @@ class ProjectList extends Component {
 
   onProjectClick(id) {
     this.props.fetchProject(id);
+    this.props.changeSidebar(false);
   }
 
   renderProjects() {
