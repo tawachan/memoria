@@ -5,3 +5,5 @@ export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const FETCH_USER = 'FETCH_USER';
+export const CHANGE_TAB = 'CHANGE_TAB';
+export const SET_TODO_STATUS = 'SET_TODO_STATUS';

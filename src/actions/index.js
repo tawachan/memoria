@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_PROJECTS, FETCH_PROJECT, FETCH_ERROR, FETCH_USER } from './types'
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_PROJECTS, FETCH_PROJECT, FETCH_ERROR, FETCH_USER, CHANGE_TAB, SET_TODO_STATUS } from './types'
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -110,7 +110,7 @@ export function fetchProject(id) {
           type: FETCH_PROJECT,
           payload: response.data
         });
-        localStorage.setItem('selected_project_id', response.data.id)
+        localStorage.setItem('active-project', response.data.id)
       })
       .catch(() => {
         dispatch(fetchError('project'));
@@ -118,6 +118,29 @@ export function fetchProject(id) {
   }
 }
 
+// for todos
+export function setTodoStatus(id, checked) {
+  return function(dispatch) {
+    axios.put(
+      `${ROOT_URL}/todos/${id}`,
+      { status: checked },
+      {headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+        }
+      })
+      .then(response => {
+        dispatch({
+          type: SET_TODO_STATUS,
+          payload: response.data
+        });
+      })
+      .catch(() => {
+        dispatch(fetchError('setTodoStatus'));
+      });
+  }
+}
 // error
 export function fetchError(error = '') {
   return {
@@ -130,5 +153,13 @@ export function authError(error) {
   return {
     type: AUTH_ERROR,
     payload: `failed to authorize. (${error})`
+  }
+}
+
+export function changeTab(activeTab) {
+  localStorage.setItem('active-tab', activeTab)
+  return {
+    type: CHANGE_TAB,
+    payload: activeTab
   }
 }
