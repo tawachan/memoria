@@ -12,6 +12,7 @@ import SwipeableViews from 'react-swipeable-views';
 import MakeIcon from 'react-material-icons/icons/action/schedule';
 import KeepIcon from 'react-material-icons/icons/hardware/memory';
 import ShareIcon from 'react-material-icons/icons/social/share';
+import SettingIcon from 'react-material-icons/icons/action/settings';
 
 const styles = {
   headline: {
@@ -47,9 +48,10 @@ class Content extends Component {
           value={this.props.activeTab}
           tabItemContainerStyle={styles.tab}
         >
-          <Tab icon={<MakeIcon />} label="Make" value={0} />
-          <Tab icon={<KeepIcon />} label="Keep" value={1} />
-          <Tab icon={<ShareIcon />} label="Share" value={2} />
+          <Tab icon={<MakeIcon />} label="" value={0} />
+          <Tab icon={<KeepIcon />} label="" value={1} />
+          <Tab icon={<ShareIcon />} label="" value={2} />
+          <Tab icon={<SettingIcon />} label="" value={3} />
         </Tabs>
 
         <Navigation />
@@ -65,6 +67,9 @@ class Content extends Component {
           </div>
           <div style={styles.slide}>
             this is share
+          </div>
+          <div style={styles.slide}>
+            this is settings
           </div>
         </SwipeableViews>
       </div>

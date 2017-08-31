@@ -67,7 +67,7 @@ class TodoList extends Component {
 function mapStateToProps(state) {
   if (state.project) {
     return {
-      todos: state.project.todos
+      todos: _.sortBy(state.project.todos, 'id')
     }
   } else {
     return { todos: '' }

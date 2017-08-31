@@ -17,6 +17,7 @@ import {
 } from 'material-ui';
 import UserIcon from 'react-material-icons/icons/action/account-circle';
 import ProjectIcon from 'react-material-icons/icons/file/folder-open';
+import EditIcon from 'react-material-icons/icons/editor/mode-edit';
 import { Link } from 'react-router-dom';
 import * as actions from '../actions/index'
 
@@ -63,7 +64,7 @@ class Navigation extends Component {
       },
       icon: {
         color: 'white',
-        margin: 20
+        margin: 10
       }
     }
 
@@ -72,10 +73,10 @@ class Navigation extends Component {
         <ToolbarGroup>
           <ProjectIcon style={styles.icon}/>
           <ToolbarTitle onClick={() => this.onDrawerChange()}style={styles.projectName} text={this.props.project.name} />
+          <EditIcon style={styles.icon}/>
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarTitle style={styles.title} text="Memoria"/>
-          <ToolbarSeparator />
           <IconMenu
             iconButtonElement={
               <IconButton touch={true}>
