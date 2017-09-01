@@ -12,6 +12,16 @@ import styles from './styles/index.css';
 // for material ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import spacing from 'material-ui/styles/spacing';
+import {
+  cyan500, cyan700,
+  pinkA200,
+  grey100, grey300, grey400, grey500,
+  white, darkBlack, fullBlack,
+} from 'material-ui/styles/colors';
+import {fade} from 'material-ui/utils/colorManipulator';
+
 
 import { AUTH_USER } from './actions/types'
 
@@ -34,10 +44,28 @@ if (token) {
 // for material ui
 injectTapEventPlugin();
 
+const muiTheme = getMuiTheme({
+  fontFamily: 'Roboto, sans-serif',
+  palette: {
+    textColor: darkBlack,
+    alternateTextColor: white,
+    primary1Color: '#32936f',
+    primary2Color: '#66c49d',
+    primary3Color: '#006444',
+    accent1Color: '#e83f6f',
+    accent2Color: '#ff759d',
+    accent3Color: '#b00044',
+    borderColor: grey300,
+    disabledColor: fade(darkBlack, 0.3),
+    clockCircleColor: fade(darkBlack, 0.07),
+    shadowColor: fullBlack,
+  },
+});
+
 ReactDOM.render(
   <div>
     <Provider store={store}>
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <BrowserRouter>
           <Switch>
             {/* before signup */}
