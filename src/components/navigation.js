@@ -15,6 +15,11 @@ import {
   Divider,
   Avatar
 } from 'material-ui';
+import { Tabs, Tab } from 'material-ui/Tabs';
+import MakeIcon from 'react-material-icons/icons/action/schedule';
+import KeepIcon from 'react-material-icons/icons/hardware/memory';
+import ShareIcon from 'react-material-icons/icons/social/share';
+import SettingIcon from 'react-material-icons/icons/action/settings';
 import UserIcon from 'react-material-icons/icons/action/account-circle';
 import ProjectIcon from 'react-material-icons/icons/file/folder-open';
 import EditIcon from 'react-material-icons/icons/editor/mode-edit';
@@ -24,15 +29,45 @@ import * as actions from '../actions/index'
 const styles = {
   avatar: {
     objectFit: 'cover'
-  }
+  },
+  toolbar: {
+    background: '#32936f'
+  },
+  tabs: {
+
+  },
+  tab: {
+    padding: '0px 20px'
+  },
+  title: {
+    color: 'white',
+    marginLeft: 20
+  },
+  projectName: {
+    color: 'white',
+    marginLeft: 10
+  },
+  button: {
+    color: 'white',
+    margin: 2,
+  },
+  icon: {
+    color: 'white',
+    margin: 10
+  },
 }
 class Navigation extends Component {
 
   componentWillMount() {
     if (this.props.user.authenticated) {
       this.props.fetchUser();
+      this.props.changeTab(parseInt(localStorage.getItem('active-tab')) || 0);
     }
   }
+
+  onTabChange = (value) => {
+    this.props.changeTab(value)
+  };
 
   onDrawerChange() {
     this.props.changeSidebar(!this.props.open);
@@ -48,34 +83,25 @@ class Navigation extends Component {
   }
   render() {
 
-    const styles = {
-      toolbar: {
-        background: '#32936f'
-      },
-      title: {
-        color: 'white',
-      },
-      projectName: {
-        color: 'white'
-      },
-      button: {
-        color: 'white',
-        margin: '2',
-      },
-      icon: {
-        color: 'white',
-        margin: 10
-      }
-    }
-
     return (
       <Toolbar style={styles.toolbar}>
         <ToolbarGroup>
-          <ProjectIcon style={styles.icon}/>
+          <ProjectIcon onClick={() => this.onDrawerChange()}style={styles.projectName} style={styles.icon}/>
           <ToolbarTitle onClick={() => this.onDrawerChange()}style={styles.projectName} text={this.props.project.name} />
           <EditIcon style={styles.icon}/>
         </ToolbarGroup>
         <ToolbarGroup>
+          <Tabs
+            onChange={this.onTabChange}
+            value={this.props.activeTab}
+            tabItemContainerStyle={styles.tabs}
+          >
+            <Tab icon={<MakeIcon />} style={styles.tab} label="" value={0} />
+            <Tab icon={<KeepIcon />} style={styles.tab} label="" value={1} />
+            <Tab icon={<ShareIcon />} style={styles.tab} label="" value={2} />
+            <Tab icon={<SettingIcon />} style={styles.tab} label="" value={3} />
+          </Tabs>
+          <ToolbarSeparator />
           <ToolbarTitle style={styles.title} text="Memoria"/>
           <IconMenu
             iconButtonElement={
@@ -102,7 +128,8 @@ function mapStateToProps(state) {
   return {
     project: state.project,
     open: state.status.sidebarOpen,
-    user: state.user
+    user: state.user,
+    activeTab: state.status.activeTab
   }
 }
 

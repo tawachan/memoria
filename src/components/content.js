@@ -4,29 +4,15 @@ import * as actions from '../actions/index';
 import Make from '../components/make/make';
 import Navigation from './navigation';
 
-import { Tabs, Tab } from 'material-ui/Tabs';
 import FontIcon from 'material-ui/FontIcon';
 import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 import SwipeableViews from 'react-swipeable-views';
 
-import MakeIcon from 'react-material-icons/icons/action/schedule';
-import KeepIcon from 'react-material-icons/icons/hardware/memory';
-import ShareIcon from 'react-material-icons/icons/social/share';
-import SettingIcon from 'react-material-icons/icons/action/settings';
 
 const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
   slide: {
     padding: 10,
   },
-  tab: {
-    background: '#32936f'
-  }
 };
 
 class Content extends Component {
@@ -43,17 +29,6 @@ class Content extends Component {
 
     return (
       <div className="content">
-        <Tabs
-          onChange={this.onTabChange}
-          value={this.props.activeTab}
-          tabItemContainerStyle={styles.tab}
-        >
-          <Tab icon={<MakeIcon />} label="" value={0} />
-          <Tab icon={<KeepIcon />} label="" value={1} />
-          <Tab icon={<ShareIcon />} label="" value={2} />
-          <Tab icon={<SettingIcon />} label="" value={3} />
-        </Tabs>
-
         <Navigation />
         <SwipeableViews
           index={this.props.activeTab}
