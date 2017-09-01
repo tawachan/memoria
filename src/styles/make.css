@@ -1,7 +1,27 @@
 .make {
-  padding: 10px;
+  padding: 10px 30px;
 }
 
+.make-column {
+  height: calc(100vh - 80px);
+  width: 100%;
+  padding: 0px 10px;
+  overflow: auto;
+}
+.make-left {
+}
+
+.make-right {
+}
+
+@media all and (min-width: 500px) {
+  .make {
+    display: flex;
+  }
+  .make-column {
+    width: 100%;
+  }
+}
 .todo-list {
 }
 

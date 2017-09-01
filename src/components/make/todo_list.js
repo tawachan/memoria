@@ -2,30 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import _ from 'lodash';
-import { List, Subheader, ListItem, Toggle } from 'material-ui';
+import { List, Subheader, ListItem, Checkbox } from 'material-ui';
 
 const styles = {
-  thumbOff: {
-    backgroundColor: 'white',
-  },
-  trackOff: {
-    backgroundColor: '#32936F',
-  },
-  thumbSwitched: {
-    backgroundColor: '#E83F6F',
-  },
-  trackSwitched: {
-    backgroundColor: '#E8AEBE',
-  },
   todo: {
-    border: '0.5px solid #EEEEEE'
+    border: '0.5px solid #EEEEEE',
+  },
+  checkbox: {
+    fill: '#E83F6F',
   }
 };
 
 class TodoList extends Component {
 
-  onToggleChange(id, checked) {
-    console.log('executed')
+  onCheckboxChange(id, checked) {
     this.props.setTodoStatus(id, checked);
   }
 
@@ -37,15 +27,11 @@ class TodoList extends Component {
             key={todo.id}
             primaryText={todo.task}
             style={styles.todo}
-            rightToggle={
-              <Toggle
-                thumbStyle={styles.thumbOff}
-                trackStyle={styles.trackOff}
-                thumbSwitchedStyle={styles.thumbSwitched}
-                trackSwitchedStyle={styles.trackSwitched}
-                labelStyle={styles.labelStyle}
-                defaultToggled={todo.status === 1}
-                onToggle={(e, checked) => this.onToggleChange(todo.id, checked)}
+            leftCheckbox={
+              <Checkbox
+                iconStyle={styles.checkbox}
+                checked={todo.status === 1}
+                onCheck={(e, checked) => this.onCheckboxChange(todo.id, checked)}
               />
             }
           />
