@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import _ from 'lodash';
@@ -51,7 +52,12 @@ class TodoList extends Component {
   render() {
     return (
       <List>
-        { this.renderTodos() }
+        <ReactCSSTransitionGroup
+          transitionName="todo-transition"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
+          { this.renderTodos() }
+        </ReactCSSTransitionGroup>
       </List>
     )
   }
