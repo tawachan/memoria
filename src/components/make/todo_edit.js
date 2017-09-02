@@ -18,8 +18,6 @@ class TodoEdit extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("updated")
-    console.log(nextProps)
     this.setState({
       task: nextProps.todo.task,
       description: nextProps.todo.description,

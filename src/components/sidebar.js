@@ -7,7 +7,6 @@ import * as actions from '../actions/index';
 class Sidebar extends Component {
 
   onDrawerChange(open, reason) {
-    console.log(reason)
     this.props.changeSidebar(open);
   };
 
@@ -16,7 +15,7 @@ class Sidebar extends Component {
       <Drawer
         docked={false}
         open={this.props.open || false}
-        width={250}
+        width={300}
         onRequestChange={(open, reason) => this.onDrawerChange(open, reason) }
       >
         <ProjectList />

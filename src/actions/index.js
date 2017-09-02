@@ -13,7 +13,9 @@ import {
   DELETE_TODO,
   FETCH_TODO,
   CHANGE_SIDEBAR,
-  SWITCH_DELETE_TODO_MODAL
+  SWITCH_DELETE_TODO_MODAL,
+  SWITCH_SIGNIN_MODAL,
+  SWITCH_SIGNUP_MODAL
 } from './types'
 
 const ROOT_URL = 'http://localhost:3000';
@@ -254,6 +256,20 @@ export function changeTab(activeTab) {
 export function switchDeleteTodoModal(open) {
   return {
     type: SWITCH_DELETE_TODO_MODAL,
+    payload: open
+  }
+}
+
+export function switchSignInModal(open) {
+  return {
+    type: SWITCH_SIGNIN_MODAL,
+    payload: open
+  }
+}
+
+export function switchSignUpModal(open) {
+  return {
+    type: SWITCH_SIGNUP_MODAL,
     payload: open
   }
 }

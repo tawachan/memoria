@@ -1,69 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import * as actions from '../../actions/';
-import { Link } from 'react-router-dom';
+import * as actions from '../../actions/index';
+import { FlatButton, RaisedButton, Dialog, TextField } from 'material-ui';
+import _ from 'lodash';
 
+import SignInForm from './sign_in_form';
+
+import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 
 class SignIn extends Component {
 
-  renderField(field) {
-    return(
-      <div className="form-group">
-        <label>{ field.label }</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder={ field.placeholder }
-          { ...field.input } />
-          { field.meta.touched ? field.meta.error : '' }
-      </div>
-    )
+  handleClose() {
+    this.props.switchSignInModal(false);
+  }
+
+  handleOpen() {
+    this.props.switchSignInModal(true);
   }
 
   onSubmit(values) {
-     this.props.signIn(values, () => {
-      this.props.history.push('/manage')
-    });
-  }
+    this.props.signIn(values, () => {
+     this.props.history.push('/manage')
+   });
+ }
 
   render() {
-    const{ handleSubmit } = this.props;
+
     return (
       <div>
-        <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
-          <Field label="Email" placeholder="test" name="email" component={this.renderField} />
-          <Field label="Password" placeholder="test" name="password" component={this.renderField} />
-          <Field label="Password Again" placeholder="test" name="password_confirm" component={this.renderField} />
-          <button type="submit" className="btn btn-primary">Submit</button>
-          { this.props.errors ? this.props.errors.user : '' }
-        </form>
-        <div>
-          { this.props.user.authenticated ? "login!" : "not yet login" }
-        </div>
-        <Link to="signout" className="btn btn-default">Sign out</Link>
+        <Dialog
+          title="Sign In"
+          modal={false}
+          open={this.props.modalOpen || false}
+          onRequestClose={ () => this.handleClose() }
+          style={{ height: '1000px'}}
+        >
+          <SignInForm />
+        </Dialog>
       </div>
-    )
+    );
   }
-}
-
-function validate(values) {
-  const errors = {};
-  if (!values.email) {
-    errors.email = "error";
-  }
-
-
-
-  return errors;
 }
 
 function mapStateToProps(state) {
-  return {user: state.user}
+  return {
+    modalOpen: state.status.signInModalOpen,
+  }
 }
 
-export default reduxForm({
-  form: 'Login',
-  fields: ['email', 'password', 'password_confirm'],
-  validate
-})(connect(mapStateToProps, actions)(SignIn));
+export default connect(mapStateToProps, actions)(SignIn);

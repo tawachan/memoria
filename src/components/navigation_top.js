@@ -3,41 +3,20 @@ import { connect } from 'react-redux';
 import {
   Toolbar,
   ToolbarGroup,
-  DropDownMenu,
-  MenuItem,
   ToolbarTitle,
-  FontIcon,
   FlatButton,
-  IconMenu,
-  IconButton,
   ToolbarSeparator,
 } from 'material-ui';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import { Link } from 'react-router-dom';
 import * as actions from '../actions/index'
 
 class Navigation extends Component {
 
-  renderAuthButtons(authenticated) {
-    const styles = {
-      button: {
-        color: 'white',
-        margin: '0'
-      }
-    }
-
-    if (!authenticated) {
-      return [
-      ]
-    }
+  onSignInClick() {
+    this.props.switchSignInModal(true);
   }
 
-  renderUnauthItem(authenticated) {
-    if (authenticated) {
-      return (
-        <Link to='/auth/sign_out'><MenuItem primaryText="Sign Out" /></Link>
-      )
-    }
+  onSignUpClick() {
+    this.props.switchSignUpModal(true);
   }
 
   render() {
@@ -62,8 +41,8 @@ class Navigation extends Component {
           <ToolbarSeparator />
         </ToolbarGroup>
         <ToolbarGroup>
-          <FlatButton label="Sign In" style={styles.button} />
-          <FlatButton label="Sign Up" style={styles.button} />
+          <FlatButton label="Sign In" style={styles.button} onClick={ () => this.onSignInClick() } />
+          <FlatButton label="Sign Up" style={styles.button} onClick={ () => this.onSignUpClick() } />
         </ToolbarGroup>
       </Toolbar>
     )
