@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
 import TodoList from './todo_list'
+import TodoEdit from './todo_edit'
 
 class Make extends Component {
+
+  renderEdit() {
+    if (this.props.todo_selected) {
+      return(
+        <div className="make-column make-right">
+          <TodoEdit />
+        </div>
+      )
+    }
+  }
 
   render() {
     return (
@@ -9,11 +22,16 @@ class Make extends Component {
         <div className='make-column make-left'>
           <TodoList />
         </div>
-        <div className="make-column make-right">
-          right
-        </div>
+        { this.renderEdit() }
       </div>
     )
   }
 }
-export default Make;
+
+function mapStateToProps(state) {
+  return {
+    todo_selected: state.project.activeTodoId ? true : false
+  }
+}
+
+export default connect(mapStateToProps)(Make);

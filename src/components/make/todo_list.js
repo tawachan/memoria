@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import _ from 'lodash';
 import { List, Subheader, ListItem, Checkbox } from 'material-ui';
+import DoneIcon from 'react-material-icons/icons/action/done';
 
 const styles = {
   todo: {
@@ -16,18 +17,25 @@ const styles = {
 class TodoList extends Component {
 
   onCheckboxChange(id, checked) {
-    this.props.setTodoStatus(id, checked);
+    const value = checked ? 1 : 0
+    this.props.updateTodoValue(id, "status", value);
   }
+
+  onTodoClick(id) {
+    this.props.fetchTodo(id);
+  }
+
 
   renderTodos() {
     return (
       _.map(this.props.todos, todo => {
-        return(
+        return[
           <ListItem
             key={todo.id}
             primaryText={todo.task}
             style={styles.todo}
-            leftCheckbox={
+            onClick={() => this.onTodoClick(todo.id)}
+            leftIcon={
               <Checkbox
                 iconStyle={styles.checkbox}
                 checked={todo.status === 1}
@@ -35,7 +43,7 @@ class TodoList extends Component {
               />
             }
           />
-        )
+        ]
       })
     )
   }
@@ -43,7 +51,6 @@ class TodoList extends Component {
   render() {
     return (
       <List>
-        <Subheader>To Do List</Subheader>
         { this.renderTodos() }
       </List>
     )

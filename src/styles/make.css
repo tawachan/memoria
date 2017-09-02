@@ -1,20 +1,25 @@
 .make {
   padding: 10px 30px;
+  max-width: 1400px;
+  max-height: calc(100vh - 80px);
+  margin: 0 auto;
 }
 
 .make-column {
-  height: calc(100vh - 80px);
-  width: 100%;
+  max-height: calc(100vh - 80px);
   padding: 0px 10px;
   overflow: auto;
 }
 .make-left {
+  width: 100%;
 }
 
 .make-right {
+  padding-top: 30px;
+  max-width: 500px;
 }
 
-@media all and (min-width: 500px) {
+@media all and (min-width: 700px) {
   .make {
     display: flex;
   }
@@ -22,6 +27,11 @@
     width: 100%;
   }
 }
+
+.make-edit {
+  padding: 0px 40px;
+}
+
 .todo-list {
 }
 

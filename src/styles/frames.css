@@ -3,3 +3,7 @@
   width: 100%;
   height: calc(100vh - 100px);
 }
+
+.body {
+  min-width: 700px;
+}

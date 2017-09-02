@@ -4,8 +4,6 @@ import * as actions from '../actions/index';
 import Make from '../components/make/make';
 import Navigation from './navigation';
 
-import FontIcon from 'material-ui/FontIcon';
-import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 import SwipeableViews from 'react-swipeable-views';
 
 
@@ -34,7 +32,7 @@ class Content extends Component {
           index={this.props.activeTab}
           onChangeIndex={this.onTabChange}
         >
-          <div>
+          <div style={styles.slide}>
             <Make />
           </div>
           <div style={styles.slide}>

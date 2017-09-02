@@ -6,5 +6,6 @@ export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const FETCH_USER = 'FETCH_USER';
 export const CHANGE_TAB = 'CHANGE_TAB';
-export const SET_TODO_STATUS = 'SET_TODO_STATUS';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const FETCH_TODO = 'FETCH_TODO';
 export const CHANGE_SIDEBAR = 'CHANGE_SIDEBAR';

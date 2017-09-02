@@ -8,7 +8,8 @@ import {
   FETCH_ERROR,
   FETCH_USER,
   CHANGE_TAB,
-  SET_TODO_STATUS,
+  UPDATE_TODO,
+  FETCH_TODO,
   CHANGE_SIDEBAR
 } from './types'
 
@@ -130,11 +131,13 @@ export function fetchProject(id) {
 }
 
 // for todos
-export function setTodoStatus(id, checked) {
+export function updateTodoValue(id, column, newValue) {
   return function(dispatch) {
+    const value = {}
+    value[column] = newValue
     axios.put(
       `${ROOT_URL}/todos/${id}`,
-      { status: checked },
+      value,
       {headers: {
         'uid': localStorage.getItem('uid'),
         'access-token': localStorage.getItem('access-token'),
@@ -142,14 +145,26 @@ export function setTodoStatus(id, checked) {
         }
       })
       .then(response => {
-        dispatch({
-          type: SET_TODO_STATUS,
-          payload: response.data
-        });
+        console.log("response", response)
+        if (response.data.status !== 'ng') {
+          dispatch({
+            type: UPDATE_TODO,
+            payload: response.data
+          });
+        } else {
+          dispatch(fetchError('setTodoStatus'));
+        }
       })
       .catch(() => {
         dispatch(fetchError('setTodoStatus'));
       });
+  }
+}
+
+export function fetchTodo(id) {
+  return {
+    type: FETCH_TODO,
+    payload: id
   }
 }
 
