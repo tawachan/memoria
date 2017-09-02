@@ -83,8 +83,8 @@ class Navigation extends Component {
     return (
       <Toolbar style={styles.toolbar}>
         <ToolbarGroup>
-          <ProjectIcon onClick={() => this.onDrawerChange()}style={styles.projectName} style={styles.icon}/>
-          <ToolbarTitle onClick={() => this.onDrawerChange()}style={styles.projectName} text={this.props.project.name} />
+          <ProjectIcon onClick={() => this.onDrawerChange()} style={styles.icon}/>
+          <ToolbarTitle onClick={() => this.onDrawerChange()} style={styles.projectName} text={this.props.project.name} />
           <EditIcon style={styles.icon}/>
         </ToolbarGroup>
         <ToolbarGroup>

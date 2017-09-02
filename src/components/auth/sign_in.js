@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
-import { FlatButton, RaisedButton, Dialog, TextField } from 'material-ui';
-import _ from 'lodash';
+import { Dialog } from 'material-ui';
 
 import SignInForm from './sign_in_form';
-
-import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
 
 class SignIn extends Component {
 

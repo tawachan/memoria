@@ -27,7 +27,7 @@ const styles = {
 class ProjectList extends Component {
   componentWillMount() {
     this.props.fetchProjects();
-    if (localStorage.getItem('active-project') != '') {
+    if (localStorage.getItem('active-project') !== '') {
       this.props.fetchProject(parseInt(localStorage.getItem('active-project')));
     }
   }
@@ -50,7 +50,7 @@ class ProjectList extends Component {
             cols={2}
             style={styles.gridTile}
           >
-            <img  onClick={() => {this.onProjectClick(project.id)}} src='http://www.fivestar-club.jp/fscdir/photolib/indonesia19/indonesia0368.jpg' />
+            <img  onClick={() => {this.onProjectClick(project.id)}} alt={'later'} src='http://www.fivestar-club.jp/fscdir/photolib/indonesia19/indonesia0368.jpg' />
           </GridTile>
         )
       })

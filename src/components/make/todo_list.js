@@ -3,8 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import _ from 'lodash';
-import { List, Subheader, ListItem, Checkbox } from 'material-ui';
-import DoneIcon from 'react-material-icons/icons/action/done';
+import { List, ListItem, Checkbox } from 'material-ui';
 
 const styles = {
   todo: {

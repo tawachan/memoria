@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
-import { TextField, Checkbox, SelectField, MenuItem, FlatButton } from 'material-ui';
+import { TextField, SelectField, MenuItem, FlatButton } from 'material-ui';
 import DeleteIcon from 'react-material-icons/icons/action/delete';
 import _ from 'lodash';
 
