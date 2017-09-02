@@ -47,8 +47,10 @@ class TodoEdit extends Component {
     this.setState({ page: e.target.value });
   }
 
-  handleOpen() {
-    this.props.switchDeleteTodoModal(true);
+  onDeleteClick() {
+    if (this.props.todo) {
+      this.props.switchDeleteTodoModal(true);
+    }
   }
 
   renderProjectList(projects) {
@@ -111,7 +113,7 @@ class TodoEdit extends Component {
           primary={true}
           icon={<DeleteIcon />}
           style={{float: 'right'}}
-          onClick={() => this.handleOpen()}
+          onClick={() => this.onDeleteClick()}
         />
       </div>
     )
