@@ -15,7 +15,7 @@ class TodoNew extends Component {
   onTodoSubmit(e, project_id) {
     const enterKey = 13;
     const value = e.target.value.trim();
-    if ((e.keyCode === enterKey) && (value) ) {
+    if ((this.props.project) && (e.keyCode === enterKey) && (value) ) {
       this.setState({ task: '' })
       this.props.createTodo(project_id, value);
     }
