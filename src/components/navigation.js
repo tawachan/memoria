@@ -20,7 +20,6 @@ import SettingIcon from 'react-material-icons/icons/action/settings';
 import UserIcon from 'react-material-icons/icons/action/account-circle';
 import ProjectIcon from 'react-material-icons/icons/file/folder-open';
 import EditIcon from 'react-material-icons/icons/editor/mode-edit';
-import { Link } from 'react-router-dom';
 import * as actions from '../actions/index'
 
 const styles = {

@@ -17,7 +17,6 @@ import {
   SWITCH_SIGNIN_MODAL,
   SWITCH_SIGNUP_MODAL
 } from './types'
-import { withRouter } from 'react-router-dom';
 
 const ROOT_URL = 'http://localhost:3000';
 
