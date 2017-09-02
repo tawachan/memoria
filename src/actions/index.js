@@ -8,6 +8,7 @@ import {
   FETCH_ERROR,
   FETCH_USER,
   CHANGE_TAB,
+  CREATE_TODO,
   UPDATE_TODO,
   FETCH_TODO,
   CHANGE_SIDEBAR
@@ -131,7 +132,36 @@ export function fetchProject(id) {
 }
 
 // for todos
-export function updateTodoValue(id, column, newValue) {
+
+export function createTodo(id, task) {
+  return function(dispatch) {
+    axios.post(
+      `${ROOT_URL}/todos/`,
+      {task: task, project_id: id},
+      {headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+        }
+      })
+      .then(response => {
+        console.log("response", response)
+        if (response.data.status !== 'ng') {
+          dispatch({
+            type: CREATE_TODO,
+            payload: response.data
+          });
+        } else {
+          dispatch(fetchError('createTodo'));
+        }
+      })
+      .catch(() => {
+        dispatch(fetchError('createTodo'));
+      });
+  }
+}
+
+export function updateTodo(id, column, newValue) {
   return function(dispatch) {
     const value = {}
     value[column] = newValue
@@ -152,11 +182,11 @@ export function updateTodoValue(id, column, newValue) {
             payload: response.data
           });
         } else {
-          dispatch(fetchError('setTodoStatus'));
+          dispatch(fetchError('updateTodo'));
         }
       })
       .catch(() => {
-        dispatch(fetchError('setTodoStatus'));
+        dispatch(fetchError('updateTodo'));
       });
   }
 }

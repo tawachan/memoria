@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
 import { TextField } from 'material-ui';
 
 class TodoNew extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      task: '',
+    }
+  }
+
+  onTodoSubmit(e, project_id) {
+    const enterKey = 13;
+    if (e.keyCode === enterKey) {
+      this.setState({ task: '' })
+      this.props.createTodo(project_id, e.target.value);
+    }
+  }
+
+  onTaskChange(e) {
+    this.setState({ task: e.target.value });
+  }
+
   render() {
     return (
       <div className="todo-new">
         <TextField
-          hintText="What do you wish to do ?"
+          hintText="New Wish"
           floatingLabelText="Your Wish"
           floatingLabelFixed={true}
           fullWidth={true}
-          value={this.state.task || ''}
-          onChange={ (event, newValue) => this.onTaskChange(event) }
-          onBlur={(event) => this.onValueChange("task", event.target.value)}
-          errorText=""
+          value={this.state.task}
+          onChange={ (e, newValue) => this.onTaskChange(e) }
+          onKeyDown={(e) => this.onTodoSubmit(e, this.props.project.id)}
         /><br />
       </div>
     )
   }
 }
-export default Manage
+
+function mapStateToProps(state) {
+  return {
+    project: state.project
+  }
+}
+export default connect(mapStateToProps, actions)(TodoNew);
 
 

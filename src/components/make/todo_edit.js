@@ -29,7 +29,7 @@ class TodoEdit extends Component {
 
   onValueChange(column, value) {
     console.log(this.props)
-    this.props.updateTodoValue(this.props.todo.id, column, value);
+    this.props.updateTodo(this.props.todo.id, column, value);
   }
 
   onTaskChange(e) {

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
-import TodoList from './todo_list'
-import TodoEdit from './todo_edit'
+import TodoList from './todo_list';
+import TodoEdit from './todo_edit';
+import TodoNew from './todo_new';
 
 class Make extends Component {
 
@@ -20,9 +21,12 @@ class Make extends Component {
     return (
       <div className="make">
         <div className='make-column make-left'>
+          <TodoNew />
           <TodoList />
         </div>
-        { this.renderEdit() }
+        <div className="make-column make-right">
+          <TodoEdit />
+        </div>
       </div>
     )
   }

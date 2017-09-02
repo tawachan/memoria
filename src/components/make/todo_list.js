@@ -18,7 +18,7 @@ class TodoList extends Component {
 
   onCheckboxChange(id, checked) {
     const value = checked ? 1 : 0
-    this.props.updateTodoValue(id, "status", value);
+    this.props.updateTodo(id, "status", value);
   }
 
   onTodoClick(id) {
