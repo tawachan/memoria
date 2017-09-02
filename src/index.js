@@ -13,11 +13,7 @@ import styles from './styles/index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import spacing from 'material-ui/styles/spacing';
 import {
-  cyan500, cyan700,
-  pinkA200,
-  grey100, grey300, grey400, grey500,
   white, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
@@ -55,7 +51,7 @@ const muiTheme = getMuiTheme({
     accent1Color: '#e83f6f',
     accent2Color: '#ff759d',
     accent3Color: '#b00044',
-    borderColor: grey300,
+    borderColor: '#DDDDDD',
     disabledColor: fade(darkBlack, 0.3),
     clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack,

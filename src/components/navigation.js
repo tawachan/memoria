@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import {
   Toolbar,
   ToolbarGroup,
-  DropDownMenu,
   MenuItem,
   ListItem,
   ToolbarTitle,
-  FontIcon,
-  FlatButton,
   IconMenu,
   IconButton,
   ToolbarSeparator,

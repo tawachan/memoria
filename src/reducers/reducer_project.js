@@ -1,5 +1,4 @@
 import { FETCH_PROJECT, UPDATE_TODO, FETCH_TODO, CREATE_TODO, DELETE_TODO } from '../actions/types';
-import _ from 'lodash';
 
 export default function(state = {}, action) {
   switch(action.type) {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/index';
 import TodoList from './todo_list';
 import TodoEdit from './todo_edit';
 import TodoNew from './todo_new';
