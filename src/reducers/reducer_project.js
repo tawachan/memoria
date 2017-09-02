@@ -1,4 +1,4 @@
-import { FETCH_PROJECT, UPDATE_TODO, FETCH_TODO, CREATE_TODO } from '../actions/types';
+import { FETCH_PROJECT, UPDATE_TODO, FETCH_TODO, CREATE_TODO, DELETE_TODO } from '../actions/types';
 import _ from 'lodash';
 
 export default function(state = {}, action) {
@@ -9,6 +9,8 @@ export default function(state = {}, action) {
     return { ...action.payload, activeTodoId: state.activeTodoId }
   case UPDATE_TODO:
     return { ...action.payload, activeTodoId: state.activeTodoId }
+  case DELETE_TODO:
+    return { ...action.payload, activeTodoId: '' }
   case FETCH_TODO:
     return { ...state, activeTodoId: action.payload }
   default:

@@ -4,6 +4,7 @@ import * as actions from '../../actions/index';
 import TodoList from './todo_list';
 import TodoEdit from './todo_edit';
 import TodoNew from './todo_new';
+import TodoDelete from './todo_delete';
 
 class Make extends Component {
 
@@ -27,6 +28,7 @@ class Make extends Component {
         <div className="make-column make-right">
           <TodoEdit />
         </div>
+        <TodoDelete />
       </div>
     )
   }

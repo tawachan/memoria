@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
-import { TextField, Checkbox, SelectField, MenuItem } from 'material-ui';
+import { TextField, Checkbox, SelectField, MenuItem, FlatButton } from 'material-ui';
+import DeleteIcon from 'react-material-icons/icons/action/delete';
 import _ from 'lodash';
 
 class TodoEdit extends Component {
@@ -42,6 +43,10 @@ class TodoEdit extends Component {
 
   onPageChange(e) {
     this.setState({ page: e.target.value });
+  }
+
+  handleOpen() {
+    this.props.switchDeleteTodoModal(true);
   }
 
   renderProjectList(projects) {
@@ -100,6 +105,12 @@ class TodoEdit extends Component {
         >
           { this.renderProjectList(this.props.projects) }
         </SelectField>
+        <FlatButton
+          primary={true}
+          icon={<DeleteIcon />}
+          style={{float: 'right'}}
+          onClick={() => this.handleOpen()}
+        />
       </div>
     )
   }
@@ -107,7 +118,6 @@ class TodoEdit extends Component {
 
 function mapStateToProps(state) {
   const activeId = state.project.activeTodoId
-  console.log("todo", activeId ? _.filter(state.project.todos, (todo) => { return todo.id === activeId}) : '')
   return {
     projects: state.projects,
     project: state.project,

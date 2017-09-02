@@ -10,8 +10,10 @@ import {
   CHANGE_TAB,
   CREATE_TODO,
   UPDATE_TODO,
+  DELETE_TODO,
   FETCH_TODO,
-  CHANGE_SIDEBAR
+  CHANGE_SIDEBAR,
+  SWITCH_DELETE_TODO_MODAL
 } from './types'
 
 const ROOT_URL = 'http://localhost:3000';
@@ -161,6 +163,33 @@ export function createTodo(id, task) {
   }
 }
 
+export function deleteTodo(id) {
+  return function(dispatch) {
+    axios.delete(
+      `${ROOT_URL}/todos/${id}`,
+      {headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+        }
+      })
+      .then(response => {
+        console.log("response", response)
+        if (response.data.status !== 'ng') {
+          dispatch({
+            type: DELETE_TODO,
+            payload: response.data
+          });
+        } else {
+          dispatch(fetchError('deleteTodo'));
+        }
+      })
+      .catch(() => {
+        dispatch(fetchError('deleteTodo'));
+      });
+  }
+}
+
 export function updateTodo(id, column, newValue) {
   return function(dispatch) {
     const value = {}
@@ -219,6 +248,13 @@ export function changeTab(activeTab) {
   return {
     type: CHANGE_TAB,
     payload: activeTab
+  }
+}
+
+export function switchDeleteTodoModal(open) {
+  return {
+    type: SWITCH_DELETE_TODO_MODAL,
+    payload: open
   }
 }
 
