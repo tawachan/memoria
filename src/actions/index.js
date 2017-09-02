@@ -17,6 +17,7 @@ import {
   SWITCH_SIGNIN_MODAL,
   SWITCH_SIGNUP_MODAL
 } from './types'
+import { withRouter } from 'react-router-dom';
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -46,6 +47,9 @@ export function signOut() {
   localStorage.removeItem('uid');
   localStorage.removeItem('access-token');
   localStorage.removeItem('client');
+  localStorage.removeItem('active-tab');
+  localStorage.removeItem('active-project');
+  localStorage.removeItem('active-todo');
   return {
     type: UNAUTH_USER
   }

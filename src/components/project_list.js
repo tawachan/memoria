@@ -27,7 +27,7 @@ const styles = {
 class ProjectList extends Component {
   componentWillMount() {
     this.props.fetchProjects();
-    if (localStorage.getItem('active-project') !== '') {
+    if (localStorage.getItem('active-project') !== 'undefined') {
       this.props.fetchProject(parseInt(localStorage.getItem('active-project')));
     }
   }

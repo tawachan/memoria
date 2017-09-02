@@ -1,4 +1,4 @@
-import { FETCH_ERROR, AUTH_ERROR } from '../actions/types';
+import { FETCH_ERROR, AUTH_ERROR, UNAUTH_USER } from '../actions/types';
 
 export default function(state = {}, action) {
   switch(action.type) {
@@ -6,6 +6,8 @@ export default function(state = {}, action) {
     return {fetch: action.payload }
   case AUTH_ERROR:
     return {user: action.payload};
+  case UNAUTH_USER:
+    return {}
   default:
     return state;
   }

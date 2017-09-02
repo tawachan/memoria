@@ -70,6 +70,10 @@ class Navigation extends Component {
     this.props.changeSidebar(!this.props.open);
   };
 
+  onSignoutClick() {
+    this.props.signOut();
+  }
+
   renderUserInfo() {
     const userinfo = `${this.props.user.data ? this.props.user.data.name : ''}`
     return(
@@ -84,7 +88,7 @@ class Navigation extends Component {
       <Toolbar style={styles.toolbar}>
         <ToolbarGroup>
           <ProjectIcon onClick={() => this.onDrawerChange()} style={styles.icon}/>
-          <ToolbarTitle onClick={() => this.onDrawerChange()} style={styles.projectName} text={this.props.project.name} />
+          <ToolbarTitle onClick={() => this.onDrawerChange()} style={styles.projectName} text={ this.props.project.name || 'Select Your Project' } />
           <EditIcon style={styles.icon}/>
         </ToolbarGroup>
         <ToolbarGroup>
@@ -113,7 +117,7 @@ class Navigation extends Component {
           >
             { this.renderUserInfo() }
             <Divider />
-            <Link to='/auth/sign_out'><MenuItem primaryText="Sign Out" /></Link>
+            <MenuItem primaryText="Sign Out" onClick={ () => this.onSignoutClick() }/>
           </IconMenu>
         </ToolbarGroup>
       </Toolbar>

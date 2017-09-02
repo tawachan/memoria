@@ -1,4 +1,4 @@
-import { CHANGE_TAB, CHANGE_SIDEBAR, SWITCH_DELETE_TODO_MODAL, SWITCH_SIGNIN_MODAL, SWITCH_SIGNUP_MODAL } from '../actions/types';
+import { CHANGE_TAB, CHANGE_SIDEBAR, SWITCH_DELETE_TODO_MODAL, SWITCH_SIGNIN_MODAL, SWITCH_SIGNUP_MODAL, UNAUTH_USER } from '../actions/types';
 
 export default function(state = {}, action) {
   switch(action.type) {
@@ -12,6 +12,8 @@ export default function(state = {}, action) {
     return { ...state, signInModalOpen: action.payload }
   case SWITCH_SIGNUP_MODAL:
     return { ...state, signUpModalOpen: action.payload }
+  case UNAUTH_USER:
+    return {}
   default:
     return state;
   }

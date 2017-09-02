@@ -15,12 +15,6 @@ class SignIn extends Component {
     this.props.switchSignInModal(true);
   }
 
-  onSubmit(values) {
-    this.props.signIn(values, () => {
-     this.props.history.push('/manage')
-   });
- }
-
   render() {
 
     return (
@@ -30,7 +24,6 @@ class SignIn extends Component {
           modal={false}
           open={this.props.modalOpen || false}
           onRequestClose={ () => this.handleClose() }
-          style={{ height: '1000px'}}
         >
           <SignInForm />
         </Dialog>

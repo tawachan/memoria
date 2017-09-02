@@ -5,10 +5,10 @@ import * as actions from '../../actions/index';
 import { FlatButton, TextField } from 'material-ui';
 import { Field, reduxForm } from 'redux-form';
 
-class SignInForm extends Component {
+class SignUpForm extends Component {
 
   onSubmit(values) {
-    this.props.signIn(values, this.redirect_to_manage.bind(this) );
+    this.props.signUp(values, this.redirect_to_manage.bind(this) );
  }
 
   redirect_to_manage() {
@@ -32,10 +32,12 @@ class SignInForm extends Component {
     return (
       <form>
         <Field label="Email" type="text" name="email" component={this.renderField} />
+        <Field label="Name" type="text" name="name" component={this.renderField} />
         <Field label="Password" type="password" name="password" component={this.renderField} />
+        <Field label="Password Again" type="password" name="password_confirm" component={this.renderField} />
         <div className="error-message">{ this.props.errors.user ? this.props.errors.user : ' ' }</div>
         <FlatButton
-          label="Sign In!"
+          label="Sign Up!"
           primary={true}
           onClick={ this.props.handleSubmit(this.onSubmit.bind(this)) }
           style={{ float: "right" }}
@@ -63,16 +65,19 @@ function validate(values) {
     }
   }
 
-
   if (!values.password) {
     errors.password = 'enter password'
+  }
+
+  if (values.password !== values.password_confirm) {
+    errors.password_confirm = 'does not match the password you entered.'
   }
 
   return errors
 }
 
 export default reduxForm({
-  form: 'Login',
-  fields: ['email', 'password'],
+  form: 'signup',
+  fields: ['email', 'password', 'password_confirm', 'name'],
   validate
-})(withRouter(connect(mapStateToProps, actions)(SignInForm)));
+})(withRouter(connect(mapStateToProps, actions)(SignUpForm)));

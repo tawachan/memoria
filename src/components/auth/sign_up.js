@@ -1,62 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
-import * as actions from '../../actions';
+import * as actions from '../../actions/index';
+import { Dialog } from 'material-ui';
+
+import SignUpForm from './sign_up_form';
 
 class SignUp extends Component {
 
+  handleClose() {
+    this.props.switchSignUpModal(false);
+  }
 
-  onSubmit(values) {
-    this.props.signUp(values, () => {
-      this.props.history.push('/manage')
-    });
- }
-
-  renderField(field) {
-    return(
-      <div className="form-group">
-        <label>{ field.label }</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder={ field.placeholder }
-          { ...field.input } />
-          { field.meta.touched ? field.meta.error : '' }
-      </div>
-    )
+  handleOpen() {
+    this.props.switchSignUpModal(true);
   }
 
   render() {
-    const { handleSubmit } = this.props
-    return(
-      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
-        signup
-        <Field label="Email" placeholder="test" name="email" component={this.renderField} />
-        <Field label="Name" placeholder="test" name="name" component={this.renderField} />
-        <Field label="Password" placeholder="test" name="password" component={this.renderField} />
-        <Field label="Password Again" placeholder="test" name="password_confirm" component={this.renderField} />
-        <button type="submit" className="btn btn-primary">SIGN UP!</button>
-        { this.props.user.errors }
-      </form>
-    )
+
+    return (
+      <div>
+        <Dialog
+          title="Sign Up"
+          modal={false}
+          open={this.props.modalOpen || false}
+          onRequestClose={ () => this.handleClose() }
+        >
+          <SignUpForm />
+        </Dialog>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    modalOpen: state.status.signUpModalOpen,
   }
 }
 
-function validate(values) {
-  const errors = {}
-
-  return errors;
-}
-
-export default reduxForm({
-  form: 'signup',
-  fields: ['email', 'password', 'password_confirm', 'name'],
-  validate
-}
-)(connect(mapStateToProps, actions)(SignUp));
+export default connect(mapStateToProps, actions)(SignUp);
