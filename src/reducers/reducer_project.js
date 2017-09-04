@@ -1,4 +1,4 @@
-import { FETCH_PROJECT, UPDATE_TODO, FETCH_TODO, CREATE_TODO, DELETE_TODO, UNAUTH_USER, CREATE_PROJECT } from '../actions/types';
+import { FETCH_PROJECT, UPDATE_TODO, FETCH_TODO, CREATE_TODO, DELETE_TODO, UNAUTH_USER, CREATE_PROJECT, UPDATE_PROJECT } from '../actions/types';
 
 export default function(state = {}, action) {
   switch(action.type) {
@@ -6,6 +6,8 @@ export default function(state = {}, action) {
     return { ...action.payload, activeTodoId: '' }
   case CREATE_PROJECT:
     return { ...action.payload, activeTodoId: '' }
+  case UPDATE_PROJECT:
+    return { ...action.payload, activeTodoId: state.activeTodoId }
   case CREATE_TODO:
     return { ...action.payload, activeTodoId: state.activeTodoId }
   case UPDATE_TODO:

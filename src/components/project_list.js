@@ -6,8 +6,6 @@ import { GridList, GridTile, FlatButton } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import EditIcon from 'react-material-icons/icons/editor/mode-edit';
-
 
 const styles = {
   root: {
@@ -26,7 +24,7 @@ const styles = {
   },
   button: {
     fontSize: '10%',
-    marginLeft: '30px'
+    marginLeft: '70px',
   },
 };
 
@@ -54,8 +52,8 @@ class ProjectList extends Component {
           <GridTile
             key={project.id}
             title={<div onClick={() => {this.onProjectClick(project.id)}}>{ project.name }</div>}
-            subtitle={<span>here is for status of project</span>}
-            actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+            subtitle={<span>{project.description}</span>}
+            actionIcon={<IconButton></IconButton>}
             titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
             cols={2}
             style={styles.gridTile}
@@ -72,7 +70,7 @@ class ProjectList extends Component {
       <GridList
         style={styles.gridList}
       >
-        <Subheader>Your Project<FlatButton label="NEW Project" onClick={() => this.onProjectNewClick() } style={styles.button} icon={<EditIcon/>}/></Subheader>
+        <Subheader>Your Project<FlatButton primary={true} label="NEW Project" onClick={() => this.onProjectNewClick() } style={styles.button} /></Subheader>
         { this.renderProjects() }
       </GridList>
     )

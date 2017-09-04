@@ -6,7 +6,8 @@ import {
   FETCH_PROJECTS,
   FETCH_PROJECT,
   CREATE_PROJECT,
-  FETCH_ERROR,
+  UPDATE_PROJECT,
+  DETECT_ERROR,
   FETCH_USER,
   CHANGE_TAB,
   CREATE_TODO,
@@ -17,6 +18,7 @@ import {
   SWITCH_DELETE_TODO_MODAL,
   SWITCH_SIGNIN_MODAL,
   SWITCH_SIGNUP_MODAL,
+  SWITCH_PROJECT_EDIT_MODAL,
   SWITCH_PROJECT_NEW_MODAL
 } from './types'
 
@@ -91,7 +93,7 @@ export function fetchUser(values) {
         });
       })
       .catch(response => {
-        dispatch(fetchError('user'));
+        dispatch(detectError('user'));
       })
   }
 }
@@ -112,7 +114,7 @@ export function fetchProjects() {
         });
       })
       .catch(() => {
-        dispatch(fetchError('projects'));
+        dispatch(detectError('projects'));
       });
   }
 }
@@ -135,7 +137,7 @@ export function fetchProject(id) {
         localStorage.setItem('active-project', response.data.id)
       })
       .catch(() => {
-        dispatch(fetchError('project'));
+        dispatch(detectError('project'));
       });
   }
 }
@@ -160,11 +162,40 @@ export function createProject(values) {
           });
           localStorage.setItem('active-project', response.data.id)
         } else {
-          dispatch(fetchError('createProject'));
+          dispatch(detectError('createProject'));
         }
       })
       .catch(() => {
-        dispatch(fetchError('createTodo'));
+        dispatch(detectError('createTodo'));
+      });
+  }
+}
+
+export function updateProject(id, values) {
+  return function(dispatch) {
+    axios.put(
+      `${ROOT_URL}/projects/${id}`,
+      values,
+      {headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+        }
+      })
+      .then(response => {
+        console.log("response", response)
+        if (response.data.status !== 'ng') {
+          dispatch({
+            type: UPDATE_PROJECT,
+            payload: response.data
+          });
+          localStorage.setItem('active-project', response.data.id)
+        } else {
+          dispatch(detectError('updateProject'));
+        }
+      })
+      .catch(() => {
+        dispatch(detectError('createTodo'));
       });
   }
 }
@@ -190,11 +221,11 @@ export function createTodo(id, task) {
             payload: response.data
           });
         } else {
-          dispatch(fetchError('createTodo'));
+          dispatch(detectError('createTodo'));
         }
       })
       .catch(() => {
-        dispatch(fetchError('createTodo'));
+        dispatch(detectError('createTodo'));
       });
   }
 }
@@ -217,11 +248,11 @@ export function deleteTodo(id) {
             payload: response.data
           });
         } else {
-          dispatch(fetchError('deleteTodo'));
+          dispatch(detectError('deleteTodo'));
         }
       })
       .catch(() => {
-        dispatch(fetchError('deleteTodo'));
+        dispatch(detectError('deleteTodo'));
       });
   }
 }
@@ -247,11 +278,11 @@ export function updateTodo(id, column, newValue) {
             payload: response.data
           });
         } else {
-          dispatch(fetchError('updateTodo'));
+          dispatch(detectError('updateTodo'));
         }
       })
       .catch(() => {
-        dispatch(fetchError('updateTodo'));
+        dispatch(detectError('updateTodo'));
       });
   }
 }
@@ -264,9 +295,9 @@ export function fetchTodo(id) {
 }
 
 // error
-export function fetchError(error = '') {
+export function detectError(error = '') {
   return {
-    type: FETCH_ERROR,
+    type: DETECT_ERROR,
     payload: `failed to fetch. (${error})`
   }
 }
@@ -311,6 +342,13 @@ export function switchSignUpModal(open) {
 export function switchProjectNewModal(open) {
   return {
     type: SWITCH_PROJECT_NEW_MODAL,
+    payload: open
+  }
+}
+
+export function switchProjectEditModal(open) {
+  return {
+    type: SWITCH_PROJECT_EDIT_MODAL,
     payload: open
   }
 }

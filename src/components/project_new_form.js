@@ -29,7 +29,6 @@ class ProjectNewForm extends Component {
       <form>
         <Field label="Name" type="text" name="name" component={this.renderField} />
         <Field label="Description" type="textarea" name="description" component={this.renderField} />
-        <div className="error-message">{ this.props.errors.user ? this.props.errors.user : ' ' }</div>
         <FlatButton
           label="New Project"
           primary={true}
@@ -42,7 +41,6 @@ class ProjectNewForm extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     errors: state.errors,
   }
@@ -50,25 +48,14 @@ function mapStateToProps(state) {
 
 function validate(values) {
   const errors = {}
-  if (!values.email) {
-    errors.email = 'enter email'
-  } else {
-    const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    if (!values.email.match(re)) {
-      errors.email = 'enter correct email address';
-    }
+  if (!values.name) {
+    errors.name = 'name can not be blank'
   }
-
-
-  if (!values.password) {
-    errors.password = 'enter password'
-  }
-
   return errors
 }
 
 export default reduxForm({
-  form: 'Login',
+  form: 'newProject',
   fields: ['name', 'description'],
   validate
 })(withRouter(connect(mapStateToProps, actions)(ProjectNewForm)));

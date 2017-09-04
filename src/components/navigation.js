@@ -16,7 +16,9 @@ import KeepIcon from 'react-material-icons/icons/hardware/memory';
 import ShareIcon from 'react-material-icons/icons/social/share';
 import SettingIcon from 'react-material-icons/icons/action/settings';
 import ProjectIcon from 'react-material-icons/icons/file/folder-open';
+import EditIcon from 'react-material-icons/icons/editor/mode-edit';
 import * as actions from '../actions/index'
+import ProjectEdit from './project_edit';
 
 const styles = {
   avatar: {
@@ -76,6 +78,10 @@ class Navigation extends Component {
     this.props.signOut();
   }
 
+  onProjectEditClick() {
+    this.props.switchProjectEditModal(true);
+  }
+
   renderUserInfo() {
     const userinfo = `${this.props.user.data ? this.props.user.data.name : ''}`
     return(
@@ -91,7 +97,9 @@ class Navigation extends Component {
       <Toolbar style={styles.toolbar}>
         <ToolbarGroup>
           <ProjectIcon onClick={() => this.onDrawerChange()} style={styles.icon}/>
-          <ToolbarTitle onClick={() => this.onDrawerChange()} style={styles.projectName} text={ this.props.project.name || 'Select Your Project' } />
+          <ToolbarTitle onClick={() => this.onDrawerChange()} style={styles.projectName} text={ this.props.project.name || 'Select Your Project' }/>
+          <EditIcon onClick={() => this.onProjectEditClick()} color='white'/>
+          <ProjectEdit />
         </ToolbarGroup>
         <ToolbarGroup>
           <Tabs
