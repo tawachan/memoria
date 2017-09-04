@@ -20,7 +20,7 @@ import {
   SWITCH_PROJECT_NEW_MODAL
 } from './types'
 
-const ROOT_URL = 'http://localhost:3000';
+const ROOT_URL = 'https://memoriaapi.herokuapp.com/';
 
 
 // for authentication and user
