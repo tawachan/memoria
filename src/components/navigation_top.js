@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   Toolbar,
   ToolbarGroup,
-  ToolbarTitle,
   FlatButton,
   ToolbarSeparator,
 } from 'material-ui';
@@ -40,7 +39,7 @@ class Navigation extends Component {
     return (
       <Toolbar style={styles.toolbar}>
         <ToolbarGroup>
-          <img style={styles.logo} src="/memoria_logo.png" />
+          <img style={styles.logo} src="/memoria_logo.png" alt="memoria_logo" />
           <ToolbarSeparator />
         </ToolbarGroup>
         <ToolbarGroup>

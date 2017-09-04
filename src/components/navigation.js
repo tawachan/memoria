@@ -7,7 +7,6 @@ import {
   ListItem,
   ToolbarTitle,
   IconMenu,
-  IconButton,
   ToolbarSeparator,
   Avatar
 } from 'material-ui';
@@ -16,7 +15,6 @@ import MakeIcon from 'react-material-icons/icons/action/schedule';
 import KeepIcon from 'react-material-icons/icons/hardware/memory';
 import ShareIcon from 'react-material-icons/icons/social/share';
 import SettingIcon from 'react-material-icons/icons/action/settings';
-import UserIcon from 'react-material-icons/icons/action/account-circle';
 import ProjectIcon from 'react-material-icons/icons/file/folder-open';
 import * as actions from '../actions/index'
 
@@ -118,7 +116,7 @@ class Navigation extends Component {
             <MenuItem primaryText="Sign Out" onClick={ () => this.onSignoutClick() }/>
           </IconMenu>
           <ToolbarSeparator />
-          <img style={styles.logo} src="/memoria_logo.png" />
+          <img style={styles.logo} src="/memoria_logo.png" alt="memoria_logo"/>
         </ToolbarGroup>
       </Toolbar>
     )
