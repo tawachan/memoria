@@ -9,7 +9,6 @@ import {
   IconMenu,
   IconButton,
   ToolbarSeparator,
-  Divider,
   Avatar
 } from 'material-ui';
 import { Tabs, Tab } from 'material-ui/Tabs';
@@ -19,12 +18,14 @@ import ShareIcon from 'react-material-icons/icons/social/share';
 import SettingIcon from 'react-material-icons/icons/action/settings';
 import UserIcon from 'react-material-icons/icons/action/account-circle';
 import ProjectIcon from 'react-material-icons/icons/file/folder-open';
-import EditIcon from 'react-material-icons/icons/editor/mode-edit';
 import * as actions from '../actions/index'
 
 const styles = {
   avatar: {
-    objectFit: 'cover'
+    objectFit: 'cover',
+  },
+  user: {
+    color: 'white'
   },
   toolbar: {
     background: '#32936f'
@@ -77,6 +78,7 @@ class Navigation extends Component {
     const userinfo = `${this.props.user.data ? this.props.user.data.name : ''}`
     return(
       <ListItem
+        style={styles.user}
         primaryText={userinfo}
         leftAvatar={<Avatar style={styles.avatar} src="https://rr.img.naver.jp/mig?src=http%3A%2F%2Fimgcc.naver.jp%2Fkaze%2Fmission%2FUSER%2F20170731%2F70%2F7614960%2F37%2F900x1200xb63bdb98aef75ec58145b02.jpg%2F300%2F600&twidth=300&theight=0&qlt=80&res_format=jpg&op=r"/>}/>
     )
@@ -88,7 +90,6 @@ class Navigation extends Component {
         <ToolbarGroup>
           <ProjectIcon onClick={() => this.onDrawerChange()} style={styles.icon}/>
           <ToolbarTitle onClick={() => this.onDrawerChange()} style={styles.projectName} text={ this.props.project.name || 'Select Your Project' } />
-          <EditIcon style={styles.icon}/>
         </ToolbarGroup>
         <ToolbarGroup>
           <Tabs
@@ -103,19 +104,16 @@ class Navigation extends Component {
           </Tabs>
           <ToolbarSeparator />
           <ToolbarTitle style={styles.title} text="Memoria"/>
+
           <IconMenu
             iconButtonElement={
-              <IconButton touch={true}>
-                <UserIcon color="white"/>
-              </IconButton>
+              this.renderUserInfo()
             }
             useLayerForClickAway={true}
             touchTapCloseDelay={5000}
             anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
           >
-            { this.renderUserInfo() }
-            <Divider />
             <MenuItem primaryText="Sign Out" onClick={ () => this.onSignoutClick() }/>
           </IconMenu>
         </ToolbarGroup>
