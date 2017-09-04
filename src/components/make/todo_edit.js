@@ -90,7 +90,7 @@ class TodoEdit extends Component {
           rowsMax={4}
         /><br />
         <TextField
-          hintText="what makes you to do so ?"
+          hintText="what makes you think so ?"
           floatingLabelText="Page Link"
           floatingLabelFixed={true}
           fullWidth={true}
