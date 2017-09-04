@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Drawer } from 'material-ui';
 import ProjectList from './project_list';
+import ProjectNew from './project_new';
 import * as actions from '../actions/index';
 
 class Sidebar extends Component {
@@ -19,6 +20,7 @@ class Sidebar extends Component {
         onRequestChange={(open, reason) => this.onDrawerChange(open, reason) }
       >
         <ProjectList />
+        <ProjectNew />
       </Drawer>
     )
   }

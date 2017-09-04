@@ -5,6 +5,7 @@ import {
   UNAUTH_USER,
   FETCH_PROJECTS,
   FETCH_PROJECT,
+  CREATE_PROJECT,
   FETCH_ERROR,
   FETCH_USER,
   CHANGE_TAB,
@@ -15,7 +16,8 @@ import {
   CHANGE_SIDEBAR,
   SWITCH_DELETE_TODO_MODAL,
   SWITCH_SIGNIN_MODAL,
-  SWITCH_SIGNUP_MODAL
+  SWITCH_SIGNUP_MODAL,
+  SWITCH_PROJECT_NEW_MODAL
 } from './types'
 
 const ROOT_URL = 'http://localhost:3000';
@@ -134,6 +136,35 @@ export function fetchProject(id) {
       })
       .catch(() => {
         dispatch(fetchError('project'));
+      });
+  }
+}
+
+export function createProject(values) {
+  return function(dispatch) {
+    axios.post(
+      `${ROOT_URL}/projects/`,
+      values,
+      {headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+        }
+      })
+      .then(response => {
+        console.log("response", response)
+        if (response.data.status !== 'ng') {
+          dispatch({
+            type: CREATE_PROJECT,
+            payload: response.data
+          });
+          localStorage.setItem('active-project', response.data.id)
+        } else {
+          dispatch(fetchError('createProject'));
+        }
+      })
+      .catch(() => {
+        dispatch(fetchError('createTodo'));
       });
   }
 }
@@ -273,6 +304,13 @@ export function switchSignInModal(open) {
 export function switchSignUpModal(open) {
   return {
     type: SWITCH_SIGNUP_MODAL,
+    payload: open
+  }
+}
+
+export function switchProjectNewModal(open) {
+  return {
+    type: SWITCH_PROJECT_NEW_MODAL,
     payload: open
   }
 }

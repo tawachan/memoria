@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import _ from 'lodash';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { GridList, GridTile, FlatButton } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import EditIcon from 'react-material-icons/icons/editor/mode-edit';
 
 
 const styles = {
@@ -17,11 +18,16 @@ const styles = {
   gridList: {
     width: 'auto',
     overflowY: 'auto',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    paddingTop: 10
   },
   gridTile: {
     margin: 10
-  }
+  },
+  button: {
+    fontSize: '10%',
+    marginLeft: '30px'
+  },
 };
 
 class ProjectList extends Component {
@@ -35,6 +41,10 @@ class ProjectList extends Component {
   onProjectClick(id) {
     this.props.fetchProject(id);
     this.props.changeSidebar(false);
+  }
+
+  onProjectNewClick() {
+    this.props.switchProjectNewModal(true);
   }
 
   renderProjects() {
@@ -62,7 +72,7 @@ class ProjectList extends Component {
       <GridList
         style={styles.gridList}
       >
-        <Subheader>Project</Subheader>
+        <Subheader>Your Project<FlatButton label="NEW Project" onClick={() => this.onProjectNewClick() } style={styles.button} icon={<EditIcon/>}/></Subheader>
         { this.renderProjects() }
       </GridList>
     )
