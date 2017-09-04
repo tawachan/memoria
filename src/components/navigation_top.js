@@ -31,13 +31,16 @@ class Navigation extends Component {
       button: {
         color: 'white',
         margin: '0'
+      },
+      logo: {
+        height: 40
       }
     }
 
     return (
       <Toolbar style={styles.toolbar}>
         <ToolbarGroup>
-          <ToolbarTitle style={styles.title} text="Memoria"/>
+          <img style={styles.logo} src="/memoria_logo.png" />
           <ToolbarSeparator />
         </ToolbarGroup>
         <ToolbarGroup>

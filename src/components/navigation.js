@@ -52,6 +52,10 @@ const styles = {
     color: 'white',
     margin: 10
   },
+  logo: {
+    height: 35,
+    margin: '0px 40px'
+  }
 }
 class Navigation extends Component {
 
@@ -102,9 +106,6 @@ class Navigation extends Component {
             <Tab icon={<ShareIcon />} style={styles.tab} label="" value={2} />
             <Tab icon={<SettingIcon />} style={styles.tab} label="" value={3} />
           </Tabs>
-          <ToolbarSeparator />
-          <ToolbarTitle style={styles.title} text="Memoria"/>
-
           <IconMenu
             iconButtonElement={
               this.renderUserInfo()
@@ -116,6 +117,8 @@ class Navigation extends Component {
           >
             <MenuItem primaryText="Sign Out" onClick={ () => this.onSignoutClick() }/>
           </IconMenu>
+          <ToolbarSeparator />
+          <img style={styles.logo} src="/memoria_logo.png" />
         </ToolbarGroup>
       </Toolbar>
     )
