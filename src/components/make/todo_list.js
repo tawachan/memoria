@@ -9,6 +9,10 @@ const styles = {
   todo: {
     border: '0.5px solid #EEEEEE',
   },
+  todo_selected: {
+    border: '0.5px solid #EEEEEE',
+    background: '#EEEEEE'
+  },
   checkbox: {
     fill: '#E83F6F',
   }
@@ -29,11 +33,11 @@ class TodoList extends Component {
   renderTodos() {
     return (
       _.map(this.props.todos, todo => {
-        return[
+        return(
           <ListItem
             key={todo.id}
             primaryText={todo.task}
-            style={styles.todo}
+            style={todo.id === this.props.activeTodoId ? styles.todo_selected : styles.todo}
             onClick={() => this.onTodoClick(todo.id)}
             leftIcon={
               <Checkbox
@@ -43,7 +47,7 @@ class TodoList extends Component {
               />
             }
           />
-        ]
+        )
       })
     )
   }
@@ -65,7 +69,8 @@ class TodoList extends Component {
 function mapStateToProps(state) {
   if (state.project) {
     return {
-      todos: _.sortBy(state.project.todos, 'id')
+      todos: _.sortBy(state.project.todos, 'id'),
+      activeTodoId: state.project.activeTodoId
     }
   } else {
     return { todos: '' }
