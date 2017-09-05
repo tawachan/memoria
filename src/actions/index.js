@@ -7,6 +7,7 @@ import {
   FETCH_PROJECT,
   CREATE_PROJECT,
   UPDATE_PROJECT,
+  DELETE_PROJECT,
   DETECT_ERROR,
   FETCH_USER,
   CHANGE_TAB,
@@ -19,7 +20,8 @@ import {
   SWITCH_SIGNIN_MODAL,
   SWITCH_SIGNUP_MODAL,
   SWITCH_PROJECT_EDIT_MODAL,
-  SWITCH_PROJECT_NEW_MODAL
+  SWITCH_PROJECT_NEW_MODAL,
+  SWITCH_PROJECT_DELETE_MODAL
 } from './types'
 
 const ROOT_URL = 'https://memoriaapi.herokuapp.com/';
@@ -200,6 +202,33 @@ export function updateProject(id, values) {
   }
 }
 
+export function deleteProject(id) {
+  return function(dispatch) {
+    axios.delete(
+      `${ROOT_URL}/projects/${id}`,
+      {headers: {
+        'uid': localStorage.getItem('uid'),
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client')
+        }
+      })
+      .then(response => {
+        console.log("response", response)
+        if (response.data.status !== 'ng') {
+          dispatch({
+            type: DELETE_PROJECT,
+            payload: response.data
+          });
+        } else {
+          dispatch(detectError('deleteProject'));
+        }
+      })
+      .catch(() => {
+        dispatch(detectError('deleteProject'));
+      });
+  }
+}
+
 // for todos
 
 export function createTodo(id, task) {
@@ -349,6 +378,13 @@ export function switchProjectNewModal(open) {
 export function switchProjectEditModal(open) {
   return {
     type: SWITCH_PROJECT_EDIT_MODAL,
+    payload: open
+  }
+}
+
+export function switchProjectDeleteModal(open) {
+  return {
+    type: SWITCH_PROJECT_DELETE_MODAL,
     payload: open
   }
 }

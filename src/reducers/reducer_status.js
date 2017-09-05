@@ -7,6 +7,7 @@ import {
   UNAUTH_USER,
   SWITCH_PROJECT_NEW_MODAL,
   SWITCH_PROJECT_EDIT_MODAL,
+  SWITCH_PROJECT_DELETE_MODAL,
   CREATE_PROJECT,
   UPDATE_PROJECT
 } from '../actions/types';
@@ -29,6 +30,8 @@ export default function(state = {}, action) {
     return { ...state, projectNewModalOpen: false, sidebarOpen: false }
   case SWITCH_PROJECT_EDIT_MODAL:
     return { ...state, projectEditModalOpen: action.payload }
+  case SWITCH_PROJECT_DELETE_MODAL:
+    return { ...state, projectDeleteModalOpen: action.payload }
   case UPDATE_PROJECT:
     return { ...state, projectEditModalOpen: false}
   case UNAUTH_USER:

@@ -21,12 +21,16 @@ class ProjectEditForm extends Component {
     })
   }
 
-  onSubmit() {
+  onEditSubmit() {
     const values = {
       name: this.state.name,
       description: this.state.description
     }
     this.props.updateProject(this.props.project.id, values);
+  }
+
+  onDeleteSubmit() {
+    this.props.switchProjectDeleteModal(true);
   }
 
   onNameChange(e) {
@@ -39,10 +43,10 @@ class ProjectEditForm extends Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <TextField
-          hintText="What do you wish to do ?"
-          floatingLabelText="Your Wish"
+          hintText="Project Name"
+          floatingLabelText="Project Name"
           floatingLabelFixed={true}
           fullWidth={true}
           value={this.state.name || ''}
@@ -50,7 +54,7 @@ class ProjectEditForm extends Component {
           errorText=""
         /><br />
         <TextField
-          hintText="Give me more detail of your wish"
+          hintText="Give me more detail of your project"
           floatingLabelText="Description"
           floatingLabelFixed={true}
           multiLine={true}
@@ -62,9 +66,15 @@ class ProjectEditForm extends Component {
           rowsMax={4}
         /><br />
         <FlatButton
+          label="Delete Project"
+          primary={true}
+          onClick={ () => this.onDeleteSubmit() }
+          style={{ float: "left" }}
+        />
+        <FlatButton
           label="Edit Project"
           primary={true}
-          onClick={ () => this.onSubmit() }
+          onClick={ () => this.onEditSubmit() }
           style={{ float: "right" }}
         />
       </form>

@@ -4,6 +4,7 @@ import * as actions from '../actions/index';
 import { Dialog } from 'material-ui';
 
 import ProjectEditForm from './project_edit_form';
+import ProjectDelete from './project_delete';
 
 class ProjectEdit extends Component {
 
@@ -26,6 +27,7 @@ class ProjectEdit extends Component {
           onRequestClose={ () => this.handleClose() }
         >
           <ProjectEditForm />
+          <ProjectDelete />
         </Dialog>
       </div>
     );

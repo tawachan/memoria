@@ -1,4 +1,4 @@
-import { FETCH_PROJECTS, UNAUTH_USER, CREATE_PROJECT, UPDATE_PROJECT } from '../actions/types';
+import { FETCH_PROJECTS, UNAUTH_USER, CREATE_PROJECT, UPDATE_PROJECT, DELETE_PROJECT } from '../actions/types';
 import _ from 'lodash';
 
 export default function(state = {}, action) {
@@ -15,6 +15,10 @@ export default function(state = {}, action) {
     newStateUpdate[action.payload.id] = action.payload
     console.log("updated projects", newStateUpdate)
     return newStateUpdate
+  case DELETE_PROJECT:
+    const newState = state;
+    delete newState[action.payload.id];
+    return newState;
   case UNAUTH_USER:
     return {}
   default:
