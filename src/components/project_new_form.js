@@ -9,6 +9,8 @@ class ProjectNewForm extends Component {
 
   onSubmit(values) {
     this.props.createProject(values);
+    this.props.changeSidebar(false);
+    this.props.switchProjectNewModal(false);
  }
 
   renderField(field) {

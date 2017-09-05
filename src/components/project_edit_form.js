@@ -27,6 +27,7 @@ class ProjectEditForm extends Component {
       description: this.state.description
     }
     this.props.updateProject(this.props.project.id, values);
+    this.props.switchProjectEditModal(false);
   }
 
   onDeleteSubmit() {
