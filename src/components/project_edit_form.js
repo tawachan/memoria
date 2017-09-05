@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import { TextField, SelectField, MenuItem, FlatButton } from 'material-ui';
-import _ from 'lodash';
+import { TextField, FlatButton } from 'material-ui';
 
 class ProjectEditForm extends Component {
 
@@ -68,9 +67,8 @@ class ProjectEditForm extends Component {
         /><br />
         <FlatButton
           label="Delete Project"
-          primary={true}
           onClick={ () => this.onDeleteSubmit() }
-          style={{ float: "left" }}
+          style={{ float: "left", color: "red" }}
         />
         <FlatButton
           label="Edit Project"

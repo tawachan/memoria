@@ -5,7 +5,6 @@ import _ from 'lodash';
 import { GridList, GridTile, FlatButton } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 const styles = {
   root: {

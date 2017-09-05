@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import { FlatButton, Dialog } from 'material-ui';
-import _ from 'lodash';
 
 class ProjectDelete extends Component {
 
@@ -51,7 +50,6 @@ class ProjectDelete extends Component {
 }
 
 function mapStateToProps(state) {
-  const activeId = state.project.activeProjectId
   return {
     modalOpen: state.status.projectDeleteModalOpen,
     project: state.project
